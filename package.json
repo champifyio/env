@@ -5,7 +5,8 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc"
+    "build": "tsc",
+    "publish": "npm publish --access public"
   },
   "author": "",
   "license": "ISC",
@@ -16,5 +17,8 @@
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "files": [
+    "dist/**/*"
+  ]
 }
