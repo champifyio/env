@@ -65,19 +65,22 @@ Whenever you access properties on the `env` object, not only do you get type saf
 
 <img src="https://github.com/champifyio/env/blob/main/assets/autocomplete.png?raw=true" alt="autocompletion" align="left" />
 
+
 If `PORT` is not defined in your `.env` file or in your production environment, your application will throw the following error when `init` is called, (hopefully) preventing your application from silently breaking.
 
 ```bash
 Missing required env var: PORT (production)
 ```
 
-You can also mark certain environment variables as optional, or required only in certain environments.
+You can also mark certain environment variables as optional or required only.
 
 ```typescript
 const env = await e.init(['PORT', e.optional('API_KEY'), e.required('DATABASE_URL')]);
 ```
 
-### Type Safety
+## Type Safety
+
+### Basic Guardrails
 
 If you try to initialize an environment variable that was not defined in the main list, your code will not compile.
 
@@ -97,7 +100,32 @@ src/index.ts:74:5 - error TS2339: Property 'DATABASE_URL' does not exist on type
        ~~~~~~~~~~~~
 ```
 
-Type safety FTW.
+### Initialization Safety
+
+If you have a function or a class that requires a certain env var to function, @champify/env allows you to enforce that the env var is initialized within that context. E.g.,
+
+```typescript
+import { EnvVarContext } from '@champify/env';
+
+const env = await e.init(['DATABASE_URL']);
+
+const callApi = async (env: EnvVarContext<'API_KEY'>) => { /* do stuff! */ }
+
+// This throws a type error because `API_KEY` was not initialized in this context!
+await callApi(env); // <-- TYPE ERROR
+```
+
+Here's the type error you'd see:
+
+```bash
+src/index.ts:77:15 - error TS2345: Argument of type 'EnvVarContext<"DATABASE_URL">' is not assignable to parameter of type 'EnvVarContext<"API_KEY">'.
+  Property 'API_KEY' is missing in type 'EnvVarContext<"DATABASE_URL">' but required in type 'EnvVarContext<"API_KEY">'.
+
+77 await callApi(env);
+                 ~~~
+```
+
+How cool is that?
 
 ## Background
 
