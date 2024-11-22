@@ -8,6 +8,8 @@
 * [Install](#-installation)
 * [Usage](#-usage)
 * [Background](#-background)
+* [A Note on API Stability](#-a-note-on-api-stability)
+* [TypeScript](#-typescript)
 * [License](#-license)
 
 ## Installation
@@ -99,7 +101,17 @@ Nothing we could find off the shelf provided a method to prevent these sorts of 
 
 `@champify/env` requires you to define all environment variables that your application uses in one place, making it easy to see what your application depends on. It also forces users to initialize only the environment variables that are needed within a specific file.
 
-I could go on, but the best way to understand the benefits of `@champify/env` is to check out the examples below.
+I could go on, but the best way to understand the benefits of @champify/env is to check it out for yourself.
+
+## A Note on API Stability
+
+This project is in active development, so it's possible there might be some changes before it hits v1.0.
+
+That being said, we'll respect semver, so you can expect that any breaking changes will come with a new major version.
+
+## TypeScript
+
+This package is meant for use with TypeScript. If you're not using TypeScript, you might not get much out of this, since much of the benefit of using this package is in surfacing type errors at compile time.
 
 ## License
 
