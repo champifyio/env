@@ -42,7 +42,7 @@ const e = new Env({ vars: ['PORT', 'DATABASE_URL', 'API_KEY'] });
 You can also define a callback function that will be called when an environment variable is not found. This is useful for logging or throwing an error.
 
 ```typescript
-const e = new Env({
+const e = new Env({ 
   vars: ['PORT', 'DATABASE_URL', 'API_KEY'],
   missingHandler: async (key: string) => {
     console.error(`Missing required env var: ${key}`);
