@@ -3,6 +3,8 @@
 
 # @champify/env [![NPM version](https://img.shields.io/npm/v/@champify/env.svg?style=flat-square)](https://www.npmjs.com/package/@champify/env)
 
+Have you ever deployed code that broke because an environment variable wasn't defined? Is your codebase peppered with so many references to `process.env` that you couldn't even compile a list of all of the required environment variables if you tried? If so, @champify/env might fix your problems.
+
 @champify/env is a type-safe environment variable management tool for Node.js and TypeScript.
 
 * [Install](#installation)
@@ -20,38 +22,40 @@ npm install @champify/env
 
 ## Usage
 
+First, define all of the environment variables that your application needs in one place (say, `env.ts`).
+
+`env.ts`:
 ```typescript
-// In env.ts
 import { Env } from '@champify/env';
 
 // Define all env vars that your application needs.
 const e = new Env({ vars: ['PORT', 'DATABASE_URL', 'API_KEY'] });
 ```
 
-You can also define a callback function that will be called when an environment variable is not found. This is useful for logging or throwing an error.
+You can also define a handler that will be called when an env variable can't be found. This is useful for logging or throwing an error.
 
 ```typescript
 const e = new Env({ 
   vars: ['PORT', 'DATABASE_URL', 'API_KEY'],
   missingHandler: async (key: string) => {
-    console.error(`Missing required env var: ${key}`);
+    metrics.put('env.missing', { key });
   }
 });
 ```
 
-In each file, initialize only the environment variables you need within that file.
+Then, in each file, initialize only the environment variables needed within the local context.
 
 ```typescript
 import { e } from './env.js';
-
-// Initialize only the environment variables that you need.
 const env = await e.init(['PORT']);
-
-// Access the environment variables with type safety
 console.log(env.PORT);
 ```
 
-If `PORT` is not defined in your `.env` file or in your production environment, your application will throw the following error at startup, preventing your application from silently failing.
+Whenever you access properties on the `env` object, not only do you get type safety, but you also get some nifty autocompletion.
+
+![Autocompletion](./assets/autocompletion.png)
+
+If `PORT` is not defined in your `.env` file or in your production environment, your application will throw the following error when `init` is called, (hopefully) preventing your application from silently breaking.
 
 ```bash
 Missing required env var: PORT (production)
