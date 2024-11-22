@@ -1,6 +1,6 @@
 {
   "name": "@champify/env",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -8,9 +8,14 @@
     "build": "tsc",
     "publish": "npm publish --access public"
   },
-  "author": "",
-  "license": "ISC",
+  "readmeFilename": "README.md",
+  "license": "Apache-2.0",
   "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/champifyio/env.git"
+  },
+  "funding": "https://champify.io",
   "devDependencies": {
     "@types/node": "^22.9.1",
     "typescript": "^5.6.3"
@@ -20,5 +25,18 @@
   },
   "files": [
     "dist/**/*"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "champify",
+    "dotenv",
+    "env",
+    ".env",
+    "environment",
+    "variables",
+    "config",
+    "settings"
   ]
 }
