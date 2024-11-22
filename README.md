@@ -1,35 +1,22 @@
-## @champify/env
-
 > [!CAUTION]
 > The public API for this package is still in active development and is not yet ready for production use.
 
-Type-safe environment variable management for Node.js.
+# @champify/env [![NPM version](https://img.shields.io/npm/v/@champify/env.svg?style=flat-square)](https://www.npmjs.com/package/@champify/env)
 
-### Motivation
+@champify/env is a type-safe environment variable management tool for Node.js and TypeScript.
 
-There are several tools to ensure that `process.env` is populated with the environment variables defined in your `.env`. In fact, we use [dotenv](https://www.npmjs.com/package/dotenv) at [Champify](https://champify.io) but we found it was too easy to do all of the right things and still cause problems. For example, say you deployed code that did something like this (taken straight from the dotenv docs):
+* [Install](#-installation)
+* [Usage](#-usage)
+* [Background](#-background)
+* [License](#-license)
 
-```typescript
-require('dotenv').config();
-
-s3.getBucketCors({Bucket: process.env.S3_BUCKET}, function(err, data) {});
-```
-
-If `S3_BUCKET` isn't defined in your `.env` file, you'll get a runtime error deep within application logic. This code might even be wrapped in an error handler that could potentially swallow the error and cause a silent failure.
-
-Nothing we could find off the shelf provided a method to prevent these sorts of errors outright, so we built it ourselves.
-
-`@champify/env` requires you to define all environment variables that your application uses in one place, making it easy to see what your application depends on. It also forces users to initialize only the environment variables that are needed within a specific file.
-
-I could go on, but the best way to understand the benefits of `@champify/env` is to check out the examples below.
-
-### Installation
+## Installation
 
 ```bash
 npm install @champify/env
 ```
 
-### Usage
+## Usage
 
 ```typescript
 // In env.ts
@@ -96,6 +83,24 @@ src/index.ts:74:5 - error TS2339: Property 'DATABASE_URL' does not exist on type
 
 Type safety FTW.
 
-### License
+## Background
+
+There are several tools to ensure that `process.env` is populated with the environment variables defined in your `.env`. In fact, we use [dotenv](https://www.npmjs.com/package/dotenv) at [Champify](https://champify.io) but we found it was too easy to do all of the right things and still cause problems. For example, say you deployed code that did something like this (taken straight from the dotenv docs):
+
+```typescript
+require('dotenv').config();
+
+s3.getBucketCors({Bucket: process.env.S3_BUCKET}, function(err, data) {});
+```
+
+If `S3_BUCKET` isn't defined in your `.env` file, you'll get a runtime error deep within application logic. This code might even be wrapped in an error handler that could potentially swallow the error and cause a silent failure.
+
+Nothing we could find off the shelf provided a method to prevent these sorts of errors outright, so we built it ourselves.
+
+`@champify/env` requires you to define all environment variables that your application uses in one place, making it easy to see what your application depends on. It also forces users to initialize only the environment variables that are needed within a specific file.
+
+I could go on, but the best way to understand the benefits of `@champify/env` is to check out the examples below.
+
+## License
 
 [Apache-2.0](./LICENSE)
