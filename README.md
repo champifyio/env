@@ -7,6 +7,8 @@ Have you ever deployed code that broke because an environment variable wasn't de
 
 @champify/env is a type-safe environment variable management tool for Node.js and TypeScript.
 
+[![LICENSE](https://img.shields.io/github/license/champifyio/env.svg)](LICENSE)
+
 * [Install](#installation)
 * [Usage](#usage)
 * [Background](#background)
@@ -53,7 +55,7 @@ console.log(env.PORT);
 
 Whenever you access properties on the `env` object, not only do you get type safety, but you also get some nifty autocompletion.
 
-![Autocompletion](./assets/autocompletion.png)
+<img src="https://raw.githubusercontent.com/champifyio/env/master/assets/autocompletion.png" alt="autocompletion" align="left" />
 
 If `PORT` is not defined in your `.env` file or in your production environment, your application will throw the following error when `init` is called, (hopefully) preventing your application from silently breaking.
 
