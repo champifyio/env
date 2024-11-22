@@ -10,14 +10,14 @@ export const getNodeEnv = () => process.env.NODE_ENV || 'development';
 export const isProduction = () => getNodeEnv() === 'production';
 export const isTest = () => getNodeEnv() === 'test';
 
-export class Env<T extends string> {
+export class Env<U extends string> {
   private throwHandler: null | ((key: string) => Promise<void>);
 
-  constructor(_: ReadonlyArray<T | EnvVarDefinition<T>>, throwHandler?: (key: string) => Promise<void> ) {
+  constructor(_: ReadonlyArray<U | EnvVarDefinition<U>>, throwHandler?: (key: string) => Promise<void> ) {
     this.throwHandler = throwHandler ?? null;
   }
 
-  init = async (env: ReadonlyArray<T | EnvVarDefinition<T>>): Promise<EnvVarContext<T>> => {
+  init = async <T extends U>(env: ReadonlyArray<T | EnvVarDefinition<T>>): Promise<EnvVarContext<T>> => {
     const context: Partial<EnvVarContext<T>> = {};
 
     for (const envVar of env) {
