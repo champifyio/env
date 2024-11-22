@@ -5,12 +5,12 @@
 
 @champify/env is a type-safe environment variable management tool for Node.js and TypeScript.
 
-* [Install](#-installation)
-* [Usage](#-usage)
-* [Background](#-background)
-* [A Note on API Stability](#-a-note-on-api-stability)
-* [TypeScript](#-typescript)
-* [License](#-license)
+* [Install](#installation)
+* [Usage](#usage)
+* [Background](#background)
+* [A Note on API Stability](#a-note-on-api-stability)
+* [TypeScript](#typescript)
+* [License](#license)
 
 ## Installation
 
