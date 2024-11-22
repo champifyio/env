@@ -5,6 +5,10 @@
 
 @champify/env is a type-safe environment variable management tool for Node.js and TypeScript.
 
+It is not a replacement, but rather a complement to tools like [dotenv](https://www.npmjs.com/package/dotenv) that help you manage environment variables in your Node.js applications. See more on why below.
+
+## Why use @champify/env?
+
 * 🫥 Have you ever deployed code that broke production because an environment variable wasn't defined? 
 * 😱 Is your codebase peppered with so many references to `process.env` that you couldn't even compile a list of all of the environment variables used in your project if you tried?
 * 🤔 Have you ever thought to yourself, "I really wish I could access environment variables with type-safety"? (of course you have)
