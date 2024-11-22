@@ -3,7 +3,11 @@
 
 # @champify/env [![NPM version](https://img.shields.io/npm/v/@champify/env.svg?style=flat-square)](https://www.npmjs.com/package/@champify/env)
 
-Have you ever deployed code that broke because an environment variable wasn't defined? Is your codebase peppered with so many references to `process.env` that you couldn't even compile a list of all of the required environment variables if you tried? If so, @champify/env might fix your problems.
+* Have you ever deployed code that broke because an environment variable wasn't defined?
+* Is your codebase peppered with so many references to `process.env` that you couldn't even compile a list of all of the required environment variables if you tried?
+* Did you ever think to yourself, "Golly, I really wish my environment variable management tool was type-safe"?
+
+If so, @champify/env might just be for you.
 
 @champify/env is a type-safe environment variable management tool for Node.js and TypeScript.
 
