@@ -94,6 +94,8 @@ src/index.ts:74:5 - error TS2339: Property 'DATABASE_URL' does not exist on type
        ~~~~~~~~~~~~
 ```
 
+Type safety FTW.
+
 ### License
 
 [Apache-2.0](./LICENSE)
