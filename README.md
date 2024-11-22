@@ -63,7 +63,7 @@ console.log(env.PORT);
 
 Whenever you access properties on the `env` object, not only do you get type safety, but you also get some nifty autocompletion.
 
-<img src="https://raw.githubusercontent.com/champifyio/env/master/assets/autocompletion.png" alt="autocompletion" align="left" />
+<img src="https://github.com/champifyio/env/blob/main/assets/autocomplete.png?raw=true" alt="autocompletion" align="left" />
 
 If `PORT` is not defined in your `.env` file or in your production environment, your application will throw the following error when `init` is called, (hopefully) preventing your application from silently breaking.
 
