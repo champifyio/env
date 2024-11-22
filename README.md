@@ -64,7 +64,7 @@ console.log(env.PORT);
 Whenever you access properties on the `env` object, not only do you get type safety, but you also get some nifty autocompletion.
 
 <img src="https://github.com/champifyio/env/blob/main/assets/autocomplete.png?raw=true" alt="autocompletion" align="left" />
-
+<br/>
 
 If `PORT` is not defined in your `.env` file or in your production environment, your application will throw the following error when `init` is called, (hopefully) preventing your application from silently breaking.
 
@@ -102,7 +102,7 @@ src/index.ts:74:5 - error TS2339: Property 'DATABASE_URL' does not exist on type
 
 ### Initialization Safety
 
-If you have a function or a class that requires a certain env var to function, @champify/env allows you to enforce that the env var is initialized within that context. E.g.,
+If you have a function or a class that requires a certain env var, @champify/env enforces initialization within that context. E.g.,
 
 ```typescript
 import { EnvVarContext } from '@champify/env';
@@ -111,8 +111,8 @@ const env = await e.init(['DATABASE_URL']);
 
 const callApi = async (env: EnvVarContext<'API_KEY'>) => { /* do stuff! */ }
 
-// This throws a type error because `API_KEY` was not initialized in this context!
-await callApi(env); // <-- TYPE ERROR
+// TYPE ERROR!
+await callApi(env);
 ```
 
 Here's the type error you'd see:
@@ -129,7 +129,9 @@ How cool is that?
 
 ## Background
 
-There are several tools to ensure that `process.env` is populated with the environment variables defined in your `.env`. In fact, we use [dotenv](https://www.npmjs.com/package/dotenv) at [Champify](https://champify.io) but we found it was too easy to do all of the right things and still cause problems. For example, say you deployed code that did something like this (taken straight from the dotenv docs):
+There are several tools to ensure that `process.env` is populated with the environment variables defined in your `.env`. In fact, we use [dotenv](https://www.npmjs.com/package/dotenv) at [Champify](https://champify.io), but we still found it was too easy to do "all of the right things" and still face problems.
+
+For example, say you deployed code that did something like this (taken straight from the dotenv docs):
 
 ```typescript
 require('dotenv').config();
