@@ -36,13 +36,21 @@ npm install @champify/env
 import { Env } from '@champify/env';
 
 // Define all env vars that your application needs.
-const e = new Env(['PORT', 'DATABASE_URL', 'API_KEY'], async (key: string) => {
-  // called when an environment variable is not found
-  // e.g., metrics.log('Environment variable not found', { key });
+const e = new Env({ vars: ['PORT', 'DATABASE_URL', 'API_KEY'] });
+```
+
+You can also define a callback function that will be called when an environment variable is not found. This is useful for logging or throwing an error.
+
+```typescript
+const e = new Env({
+  vars: ['PORT', 'DATABASE_URL', 'API_KEY'],
+  missingHandler: async (key: string) => {
+    console.error(`Missing required env var: ${key}`);
+  }
 });
 ```
 
-Then, you can use this class to read your environment variables.
+In each file, initialize only the environment variables you need within that file.
 
 ```typescript
 import { e } from './env.js';
@@ -54,11 +62,21 @@ const env = await e.init(['PORT']);
 console.log(env.PORT);
 ```
 
+If `PORT` is not defined in your `.env` file or in your production environment, your application will throw the following error at startup, preventing your application from silently failing.
+
+```bash
+Missing required env var: PORT (production)
+```
+
+You can also mark certain environment variables as optional, or required only in certain environments.
+
+```typescript
+const env = await e.init(['PORT', e.optional('API_KEY'), e.required('DATABASE_URL')]);
+```
+
 ### Type Safety
 
-
-
- you'll get a type error.
+If you try to initialize an environment variable that was not defined in the main list, your code will not compile.
 
 ```bash
 src/error.ts:73:27 - error TS2322: Type '"OHNO_NOT_DEFINED"' is not assignable to type '"PORT" | "DATABASE_URL" | "API_KEY" | EnvVarDefinition<"PORT" | "DATABASE_URL" | "API_KEY">'.
@@ -67,7 +85,7 @@ src/error.ts:73:27 - error TS2322: Type '"OHNO_NOT_DEFINED"' is not assignable t
                              ~~~~~~~~~~~~~~~~~~
 ```
 
-If you try to access an environment variable that was not initialized, you will also get a type error.
+Likewise, if you try to access an environment variable that was not initialized within the specific context, your code will also not compile.
 
 ```bash
 src/index.ts:74:5 - error TS2339: Property 'DATABASE_URL' does not exist on type 'EnvVarContext<"PORT">'.
