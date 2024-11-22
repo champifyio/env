@@ -17,7 +17,10 @@ npm install @champify/env
 // In index.ts
 import { Env } from '@champify/env';
 
-const e = new Env(['PORT', 'DATABASE_URL', 'API_KEY']);
+const e = new Env(['PORT', 'DATABASE_URL', 'API_KEY'], async (key: string) => {
+  // called when an environment variable is not found
+  // e.g., metrics.log('Environment variable not found', { key });
+});
 ```
 
 Then, you can use this class to read your environment variables with type safety!
