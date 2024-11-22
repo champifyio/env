@@ -102,13 +102,14 @@ src/index.ts:74:5 - error TS2339: Property 'DATABASE_URL' does not exist on type
 
 ### Initialization Safety
 
-If you have a function or a class that requires a certain env var, @champify/env enforces initialization within that context. E.g.,
+If you have a function or a class that requires a certain env var, you can use `EnvVarContext` to enforce initialization within that context. E.g.,
 
 ```typescript
 import { EnvVarContext } from '@champify/env';
 
 const env = await e.init(['DATABASE_URL']);
 
+// This code requires API_KEY specifically, so call that out.
 const callApi = async (env: EnvVarContext<'API_KEY'>) => { /* do stuff! */ }
 
 // TYPE ERROR!
